@@ -9,6 +9,7 @@ const bcrypt = require('bcrypt');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const methodOverride = require('method-override');
+const path = require('path');
 
 var Schema = mongoose.Schema;
 mongoose.connect('mongodb://localhost:27017/flashcards');
@@ -40,36 +41,37 @@ app.post('/home', function (req, res) {
     if (err) {
       res.send(err);
     }
+    console.log(user);
     res.json(user);
   });
 });
 
 app.get('/', function(req, res) {
-  res.sendfile('public/views/index.html');
+  res.sendFile(path.join(__dirname, 'public', 'views', 'index.html'));
 });
 
 app.get('/login.html', function (req, res) {
-  res.sendfile('public/views/login.html');
+  res.sendFile(path.join(__dirname, 'public','views', 'login.html'));
 });
 
 app.get('/home.html', function (req, res) {
-  res.sendfile('public/views/home.html');
+  res.sendFile(path.join(__dirname, 'public','views', 'home.html'));
 });
 
 app.get('/js/app.js', function(req, res) {
-  res.sendfile('public/js/app.js');
+  res.sendFile(path.join(__dirname, 'public','js', 'app.js'));
 });
 
 app.get('/js/controllers/homeCtrl.js', function(req, res) {
-  res.sendfile('public/js/controllers/homeCtrl.js');
+  res.sendFile(path.join(__dirname, 'public','js', 'controllers', 'homeCtrl.js'));
 });
 
 app.get('/js/controllers/loginCtrl.js', function(req, res) {
-  res.sendfile('public/js/controllers/loginCtrl.js');
+  res.sendFile(path.join(__dirname, 'public','js', 'controllers', 'loginCtrl.js'));
 });
 
 app.get('/js/services/authService.js', function(req, res) {
-  res.sendfile('public/js/services/authService.js');
+  res.sendFile(path.join(__dirname, 'public','js', 'services', 'authService.js'));
 });
 
 app.listen(8082);
