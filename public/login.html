@@ -1,6 +1,22 @@
 <div ng-controller="loginCtrl">
-  <h3>Welcome to FlashKardz</h3>
+  <h2 class="text-center">Welcome to FlashKardz®</h2>
+  <h2 class="text-center"><small>Please log in</small></h2>
 
-  <input type="text" ng-model="loginCtrlData.username">
-  <input type="text" ng-model="loginCtrlData.password">
+  <form>
+    <div class="form-group row">
+      <label for="my-username" class="col-sm-2 col-form-label">Username</label>
+      <div class="col-sm-8">
+        <input class="form-control" type="text" placeholder="Enter username" ng-model="loginCtrlData.username" id="my-username">
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="my-password" class="col-sm-2 col-form-label">Password</label>
+      <div class="col-sm-8">
+        <input class="form-control" type="password" placeholder="Enter password" ng-model="loginCtrlData.password" id="my-password">
+      </div>
+    </div>
+
+  </form>
+
 </div>
