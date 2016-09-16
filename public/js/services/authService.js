@@ -22,6 +22,6 @@ angular.module('app').factory('AuthService', function ($http, $location) {
     },
     logout : function () {},
     isLoggedIn: function() {},
-    currentUser: function() { return currentUser; }
+    currentUser: function() { return loggedInUser; }
   };
 });

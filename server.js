@@ -36,7 +36,7 @@ app.post('/home', function (req, res) {
     password : req.body.password
   });
 
-  Users.findOne(loggedInUser, function (err, user) {
+  User.findOne(loggedInUser, function (err, user) {
     if (err) {
       res.send(err);
     }
@@ -50,6 +50,10 @@ app.get('/', function(req, res) {
 
 app.get('/login.html', function (req, res) {
   res.sendfile('public/views/login.html');
+});
+
+app.get('/home.html', function (req, res) {
+  res.sendfile('public/views/home.html');
 });
 
 app.get('/js/app.js', function(req, res) {
