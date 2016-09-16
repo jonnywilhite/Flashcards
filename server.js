@@ -26,23 +26,19 @@ var testUser = new User({
   password: 'test123'
 });
 
-testUser.save(function (err) {
-  if (err) throw err;
+User.findOne({ username: 'john'}, function (err, user) {
+  if (err) {
+    throw err;
+  }
 
-  User.findOne({ username: 'john'}, function (err, user) {
-    if (err) {
-      throw err;
-    }
+  user.comparePassword('test123', function (err, isMatch) {
+    if (err) throw err;
+    console.log('test123: ', isMatch);
+  });
 
-    user.comparePassword('test123', function (err, isMatch) {
-      if (err) throw err;
-      console.log('test123: ', isMatch);
-    });
-
-    user.comparePassword('123test', function (err, isMatch) {
-      if (err) throw err;
-      console.log('123test: ', isMatch);
-    });
+  user.comparePassword('123test', function (err, isMatch) {
+    if (err) throw err;
+    console.log('123test: ', isMatch);
   });
 });
 
