@@ -4,22 +4,7 @@ angular.module('app').factory('AuthService', function ($http, $location) {
   var loggedInUser;
 
   return {
-    login : function(user) {
-
-      var something;
-
-      $http.post('/home', user)
-        .success(function (data) {
-          $location.path('/home');
-          loggedInUser = data;
-          something = data;
-        })
-        .error(function (data) {
-          something = data;
-        });
-
-      return something;
-    },
+    login : function(user) {},
     logout : function () {},
     isLoggedIn: function() {},
     currentUser: function() { return loggedInUser; }

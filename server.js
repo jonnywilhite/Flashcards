@@ -37,12 +37,27 @@ app.post('/home', function (req, res) {
     password : req.body.password
   });
 
-  User.findOne(loggedInUser, function (err, user) {
+  User.findOne({ username: loggedInUser.username }, function (err, user) {
     if (err) {
       res.send(err);
     }
-    console.log(user);
-    res.json(user);
+
+    if (user) {
+      user.comparePassword(loggedInUser.password, function (err, isMatch) {
+        if (err) {
+          res.send(err);
+        }
+        if (isMatch) {
+          console.log('match!');
+          res.json(user);
+        } else {
+          console.log('no match!');
+          res.json(null);
+        }
+      });
+    } else {
+      res.json(null);
+    }
   });
 });
 
