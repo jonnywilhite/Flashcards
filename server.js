@@ -45,11 +45,11 @@ app.post('/home', function (req, res) {
 });
 
 app.get('/', function(req, res) {
-  res.sendfile('public/index.html');
+  res.sendfile('public/views/index.html');
 });
 
 app.get('/login.html', function (req, res) {
-  res.sendfile('public/login.html');
+  res.sendfile('public/views/login.html');
 });
 
 app.get('/js/app.js', function(req, res) {
@@ -62,6 +62,10 @@ app.get('/js/controllers/homeCtrl.js', function(req, res) {
 
 app.get('/js/controllers/loginCtrl.js', function(req, res) {
   res.sendfile('public/js/controllers/loginCtrl.js');
+});
+
+app.get('/js/services/authService.js', function(req, res) {
+  res.sendfile('public/js/services/authService.js');
 });
 
 app.listen(8082);

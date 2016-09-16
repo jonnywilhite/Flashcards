@@ -1,9 +1,10 @@
 "use strict";
 
-angular.module('app').controller('homeCtrl', function($http) {
+angular.module('app').controller('homeCtrl', function($http, AuthService) {
   var homeCtrlData = this;
 
   homeCtrlData.flashcards = [];
+  homeCtrlData.user = AuthService.currentUser();
 
   $http.get('/api/flashcards')
     .success(function(data) {
