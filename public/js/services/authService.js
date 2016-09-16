@@ -4,9 +4,12 @@ angular.module('app').factory('AuthService', function ($http, $location) {
   var loggedInUser;
 
   return {
-    login : function(user) {},
+    login : function() {},
     logout : function () {},
     isLoggedIn: function() {},
-    currentUser: function() { return loggedInUser; }
+    currentUser: function() { return loggedInUser; },
+    setUser: function (user) {
+      loggedInUser = user;
+    }
   };
 });

@@ -3,15 +3,20 @@
 angular.module('app').controller('loginCtrl', function ($http, $location, $scope, AuthService) {
   var loginCtrlData = this;
 
-  loginCtrlData.loggedInUser = {};
+  loginCtrlData.loggedInUser = AuthService.currentUser();
+  console.log(AuthService.currentUser());
   loginCtrlData.errorMsg = "";
+
+  if (loginCtrlData.loggedInUser) {
+    $location.path('/home');
+  }
 
   loginCtrlData.authenticate = function (user) {
     $http.post('/home', user)
       .success(function (data) {
 
         if (data) {
-          AuthService.loggedInUser = data;
+          AuthService.setUser(data);
           $location.path('/home');
         } else {
           loginCtrlData.errorMsg = "Login failed. Please try again";
