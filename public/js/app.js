@@ -2,13 +2,19 @@
 
 var app = angular.module('app', ['ngRoute']);
 
-app.config(function ($routeProvider) {
-  $routeProvider.when("/", {
-    templateUrl : "login.html",
-    controller : "loginCtrl"
-  })
-  .when("/home", {
-    templateUrl : "home.html",
-    controller : "homeCtrl"
-  });
+app.config(function ($routeProvider, $locationProvider) {
+  $routeProvider
+    .when("/login", {
+      templateUrl : "login.html",
+      controller : "loginCtrl"
+    })
+    .when("/home", {
+      templateUrl : "home.html",
+      controller : "homeCtrl"
+    })
+    .otherwise({
+      redirectTo: "/login"
+    });
+
+  //$locationProvider.html5Mode(true);
 });
