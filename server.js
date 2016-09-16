@@ -53,9 +53,16 @@ app.get('/api/flashcards', function(req, res) {
 });
 
 app.get('/', function(req, res) {
+  res.sendfile('public/index.html');
+});
+
+app.get('/login.html', function (req, res) {
   res.sendfile('public/login.html');
 });
 
 app.get('/app.js', function(req, res) {
   res.sendfile('public/app.js');
-})
+});
+
+app.listen(8082);
+console.log("Listening on port 8082");

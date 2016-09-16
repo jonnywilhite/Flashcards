@@ -6,7 +6,7 @@ app.config(function ($routeProvider) {
   $routeProvider.when("/", {
     templateUrl : "login.html"
   })
-  .when("home" {
+  .when("home", {
     templateUrl : "home.html"
   });
 });
