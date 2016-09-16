@@ -1,12 +1,11 @@
 "use strict";
 
-angular.module('app').controller('loginCtrl', function ($http) {
+angular.module('app').controller('loginCtrl', AuthService, function ($http, $location) {
   var loginCtrlData = this;
 
-  loginCtrlData.username = "";
-  loginCtrlData.password = "";
+  loginCtrlData.loggedInUser = {};
 
-  loginCtrlData.login = function () {
-    $http.post()
+  loginCtrlData.login = function (user) {
+    AuthService.login(user);
   };
 });
