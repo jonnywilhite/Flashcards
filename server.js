@@ -60,8 +60,16 @@ app.get('/login.html', function (req, res) {
   res.sendfile('public/login.html');
 });
 
-app.get('/app.js', function(req, res) {
-  res.sendfile('public/app.js');
+app.get('/js/app.js', function(req, res) {
+  res.sendfile('public/js/app.js');
+});
+
+app.get('/js/controllers/homeCtrl.js', function(req, res) {
+  res.sendfile('public/js/controllers/homeCtrl.js');
+});
+
+app.get('/js/controllers/loginCtrl.js', function(req, res) {
+  res.sendfile('public/js/controllers/loginCtrl.js');
 });
 
 app.listen(8082);
