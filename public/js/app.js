@@ -26,4 +26,21 @@ app.config(function ($routeProvider, $locationProvider) {
     // });
 
   $locationProvider.html5Mode(true);
+})
+.run(function ($cookies, $rootScope, $location) {
+  $rootScope.$on('$routeChangeStart', function (event, next, current) {
+    if (!$cookies.get('username')) {
+      if (next.templateUrl == 'views/login.html') {
+
+      } else {
+        $location.path('/login');
+      }
+    } else {
+      if (next.templateUrl == 'views/home.html') {
+
+      } else {
+        $location.path('/home');
+      }
+    }
+  });
 });

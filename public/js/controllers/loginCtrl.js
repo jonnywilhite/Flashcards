@@ -7,9 +7,9 @@ angular.module('app').controller('loginCtrl', function ($http, $location, $scope
   console.log($cookies.get('username'));
   loginCtrlData.errorMsg = "";
 
-  if (loginCtrlData.loggedInUser || $cookies.get('username')) {
-    $location.path('/home');
-  }
+  // if (loginCtrlData.loggedInUser || $cookies.get('session')) {
+  //   $location.path('/home');
+  // }
 
   loginCtrlData.authenticate = function (user) {
     $http.post('/login', user)
