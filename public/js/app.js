@@ -4,6 +4,9 @@ var app = angular.module('app', ['ngRoute', 'ngPageTitle']);
 
 app.config(function ($routeProvider, $locationProvider) {
   $routeProvider
+    .when("/", {
+      redirectTo : "/login"
+    })
     .when("/login", {
       templateUrl : "views/login.html",
       controller : "loginCtrl",
@@ -17,10 +20,10 @@ app.config(function ($routeProvider, $locationProvider) {
       data : {
         pageTitle: "FlashKardz® | Home"
       }
-    })
-    .otherwise({
-      redirectTo: "/login"
     });
+    // .otherwise({
+    //   redirectTo: "/login"
+    // });
 
-  //$locationProvider.html5Mode(true);
+  $locationProvider.html5Mode(true);
 });

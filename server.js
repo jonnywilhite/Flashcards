@@ -17,12 +17,6 @@ const app = express();
 
 mongoose.connect('mongodb://localhost:27017/flashcards');
 
-app.use(express.static('public')); //lets you serve static files
-app.use(morgan('dev')); //logging
-app.use(bodyParser.urlencoded({'extended':'true'}));
-app.use(bodyParser.json());
-app.use(bodyParser.json({type: 'application/vnd.api+json'}));
-app.use(methodOverride());
 app.use(session({ //lets you store cookies
   cookieName: 'session',
   secret: 'spring_beans',
@@ -47,12 +41,20 @@ app.use(function (req, res, next) {
 });
 
 function requireLogin(req, res, next) {
+  console.log(req.user);
   if (!req.user) {
     res.redirect('/');
   } else {
     next();
   }
 }
+
+app.use(express.static('public')); //lets you serve static files
+app.use(morgan('dev')); //logging
+app.use(bodyParser.urlencoded({'extended':'true'}));
+app.use(bodyParser.json());
+app.use(bodyParser.json({type: 'application/vnd.api+json'}));
+app.use(methodOverride());
 
 app.get('/api/flashcards', function(req, res) {
   Flashcard.find(function(err, flashcards) {  //mongoose schemas come with .find and .findOne methods
@@ -91,6 +93,15 @@ app.post('/login', function (req, res) {
 });
 
 app.get('/', function(req, res) {
+  res.sendFile(path.join(__dirname, 'public', 'views', 'index.html'));
+});
+
+app.get('/login', function(req, res) {
+  res.sendFile(path.join(__dirname, 'public', 'views', 'index.html'));
+});
+
+app.get('/home', requireLogin, function (req, res) {
+  console.log('getting home');
   res.sendFile(path.join(__dirname, 'public', 'views', 'index.html'));
 });
 
