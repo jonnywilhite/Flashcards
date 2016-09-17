@@ -1,10 +1,9 @@
 "use strict";
 
-angular.module('app').controller('loginCtrl', function ($http, $location, $scope, $cookies, AuthService) {
+angular.module('app').controller('loginCtrl', function ($http, $location, $cookies, AuthService) {
   var loginCtrlData = this;
 
   loginCtrlData.loggedInUser = AuthService.currentUser();
-  console.log($cookies.get('username'));
   loginCtrlData.errorMsg = "";
 
   // if (loginCtrlData.loggedInUser || $cookies.get('session')) {
