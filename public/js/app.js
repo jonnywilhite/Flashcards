@@ -1,6 +1,6 @@
 "use strict";
 
-var app = angular.module('app', ['ngRoute', 'ngPageTitle']);
+var app = angular.module('app', ['ngRoute', 'ngPageTitle', 'ngCookies']);
 
 app.config(function ($routeProvider, $locationProvider) {
   $routeProvider

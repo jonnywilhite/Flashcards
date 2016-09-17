@@ -101,7 +101,6 @@ app.get('/login', function(req, res) {
 });
 
 app.get('/home', requireLogin, function (req, res) {
-  console.log('getting home');
   res.sendFile(path.join(__dirname, 'public', 'views', 'index.html'));
 });
 
