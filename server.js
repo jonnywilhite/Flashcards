@@ -10,8 +10,8 @@ const path = require('path'); //could probably do without this
 const session = require('client-sessions'); //cookies
 
 //Model classes
-const User = require('./model/user-model');
-const Flashcard = require('./model/flashcard-model');
+const User = require('./app/model/user-model');
+const Flashcard = require('./app/model/flashcard-model');
 
 const app = express();
 
