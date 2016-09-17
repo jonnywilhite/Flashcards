@@ -7,10 +7,7 @@ var Schema = mongoose.Schema;
 const SALT_WORK_FACTOR = 10;
 
 var flashcardSchema = new Schema({
-  _user : {
-    type : Number,
-    ref: 'User'
-  },
+  user : String,
   question : String,
   answer : String
 });
