@@ -30,6 +30,30 @@ app.use(session({ //lets you store cookies
   activeDuration: 5 * 1000 * 60
 }));
 
+app.use(function (req, res, next) {
+  if (req.session && req.session.user) {
+    User.findOne({ username: req.session.user.username }, function (err, user) {
+      if (user) {
+        req.user = user;
+        delete req.user.password;
+        req.session.user = user;
+        res.locals.user = user;
+      }
+      next();
+    });
+  } else {
+    next();
+  }
+});
+
+function requireLogin(req, res, next) {
+  if (!req.user) {
+    res.redirect('/');
+  } else {
+    next();
+  }
+}
+
 app.get('/api/flashcards', function(req, res) {
   Flashcard.find(function(err, flashcards) {  //mongoose schemas come with .find and .findOne methods
     if (err) {

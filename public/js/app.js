@@ -1,16 +1,22 @@
 "use strict";
 
-var app = angular.module('app', ['ngRoute']);
+var app = angular.module('app', ['ngRoute', 'ngPageTitle']);
 
 app.config(function ($routeProvider, $locationProvider) {
   $routeProvider
     .when("/login", {
       templateUrl : "views/login.html",
-      controller : "loginCtrl"
+      controller : "loginCtrl",
+      data : {
+        pageTitle: "FlashKardz® | Login"
+      }
     })
     .when("/home", {
       templateUrl : "views/home.html",
-      controller : "homeCtrl"
+      controller : "homeCtrl",
+      data : {
+        pageTitle: "FlashKardz® | Home"
+      }
     })
     .otherwise({
       redirectTo: "/login"
