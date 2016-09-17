@@ -1,28 +1,37 @@
 "use strict";
 
 const express = require('express');
-const app = express();
 const mongoose = require('mongoose');
+const bcrypt = require('bcrypt'); //hashing passwords
+const bodyParser = require('body-parser'); //still not sure what this does
+const methodOverride = require('method-override'); //or this
+const morgan = require('morgan'); //logging
+const path = require('path'); //could probably do without this
+const session = require('client-sessions'); //cookies
+
+//Model classes
 const User = require('./model/user-model');
 const Flashcard = require('./model/flashcard-model');
-const bcrypt = require('bcrypt');
-const bodyParser = require('body-parser');
-const morgan = require('morgan');
-const methodOverride = require('method-override');
-const path = require('path');
 
-var Schema = mongoose.Schema;
+const app = express();
+
 mongoose.connect('mongodb://localhost:27017/flashcards');
 
-app.use(express.static('public'));
-app.use(morgan('dev'));
+app.use(express.static('public')); //lets you serve static files
+app.use(morgan('dev')); //logging
 app.use(bodyParser.urlencoded({'extended':'true'}));
 app.use(bodyParser.json());
 app.use(bodyParser.json({type: 'application/vnd.api+json'}));
 app.use(methodOverride());
+app.use(session({ //lets you store cookies
+  cookieName: 'session',
+  secret: 'spring_beans',
+  duration: 30 * 1000 * 60,
+  activeDuration: 5 * 1000 * 60
+}));
 
 app.get('/api/flashcards', function(req, res) {
-  Flashcard.find(function(err, flashcards) {
+  Flashcard.find(function(err, flashcards) {  //mongoose schemas come with .find and .findOne methods
     if (err) {
       res.send(err);
     }
@@ -30,28 +39,24 @@ app.get('/api/flashcards', function(req, res) {
   });
 });
 
-app.post('/home', function (req, res) {
+app.post('/login', function (req, res) {
 
-  var loggedInUser = new User({
-    username : req.body.username,
-    password : req.body.password
-  });
-
-  User.findOne({ username: loggedInUser.username }, function (err, user) {
+  User.findOne({ username: req.body.username }, function (err, user) {
     if (err) {
       res.send(err);
     }
 
     if (user) {
-      user.comparePassword(loggedInUser.password, function (err, isMatch) {
+
+      //comparePassword hashes the pw and checks the hash in the DB
+      user.comparePassword(req.body.password, function (err, isMatch) {
         if (err) {
           res.send(err);
         }
         if (isMatch) {
-          console.log('match!');
+          req.session.user = user;  //stores cookie!
           res.json(user);
         } else {
-          console.log('no match!');
           res.json(null);
         }
       });

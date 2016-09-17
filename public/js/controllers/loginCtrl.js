@@ -12,7 +12,7 @@ angular.module('app').controller('loginCtrl', function ($http, $location, $scope
   }
 
   loginCtrlData.authenticate = function (user) {
-    $http.post('/home', user)
+    $http.post('/login', user)
       .success(function (data) {
 
         if (data) {
