@@ -20,10 +20,12 @@ angular.module('app').controller('loginCtrl', function ($http, $location, $cooki
           $location.path('/home');
         } else {
           loginCtrlData.errorMsg = "Login failed. Please try again";
+          loginCtrlData.loggedInUser = {};
         }
       })
       .error(function (data) {
         loginCtrlData.errorMsg = "Login failed. Please try again";
+        loginCtrlData.loggedInUser = {};
       });
   };
 });

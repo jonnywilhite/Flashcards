@@ -41,7 +41,6 @@ app.use(function (req, res, next) {
 });
 
 function requireLogin(req, res, next) {
-  console.log(req.user);
   if (!req.user) {
     res.redirect('/');
   } else {
@@ -57,7 +56,7 @@ app.use(bodyParser.json({type: 'application/vnd.api+json'}));
 app.use(methodOverride());
 
 app.get('/api/flashcards', function(req, res) {
-  Flashcard.find(function(err, flashcards) {  //mongoose schemas come with .find and .findOne methods
+  Flashcard.find({user: req.session.user.username}, function(err, flashcards) {  //mongo schemas come with .find and .findOne methods
     if (err) {
       res.send(err);
     }
