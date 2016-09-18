@@ -3,7 +3,7 @@
 angular.module('app').controller('loginCtrl', function ($http, $location, $cookies, AuthService) {
   var loginCtrlData = this;
 
-  loginCtrlData.loggedInUser = AuthService.currentUser();
+  loginCtrlData.loggedInUser = {username: "", password: ""};
   loginCtrlData.errorMsg = "";
 
   // if (loginCtrlData.loggedInUser || $cookies.get('session')) {

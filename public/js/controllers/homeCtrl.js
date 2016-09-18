@@ -1,6 +1,6 @@
 "use strict";
 
-angular.module('app').controller('homeCtrl', function($http, $cookies, AuthService) {
+angular.module('app').controller('homeCtrl', function($http, $location, $cookies, AuthService) {
   var homeCtrlData = this;
 
   homeCtrlData.flashcards = [];
@@ -13,4 +13,16 @@ angular.module('app').controller('homeCtrl', function($http, $cookies, AuthServi
     .error(function(data) {
       console.log('Error getting flashcards: ' + data);
     });
+
+  homeCtrlData.logout = function () {
+    $http.get('/logout')
+      .success(function (data) {
+        $cookies.remove('username');
+        $location.path('/logout');
+      })
+      .error(function (data) {
+        $cookies.remove('username');
+        $location.path('/logout');
+      });
+  };
 });

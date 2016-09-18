@@ -10,15 +10,15 @@ angular.module('app').factory('AuthService', function ($http, $q, $timeout) {
       $http.post('/login', {username: username, password: password})
         .success(function (data, status) {
           if (status === 200 && data.status) {
-            user = true;
+            loggedInUser = true;
             deferred.resolve();
           } else {
-            user = false;
+            loggedInUser = false;
             deferred.reject();
           }
         })
         .error(function (data) {
-          user = false;
+          loggedInUser = false;
           deferred.reject();
         });
       return deferred.promise;
@@ -28,11 +28,11 @@ angular.module('app').factory('AuthService', function ($http, $q, $timeout) {
 
       $http.get('/logout')
         .success(function (data) {
-          user = false;
+          loggedInUser = false;
           deferred.resolve();
         })
         .error(function (data) {
-          user = false;
+          loggedInUser = false;
           deferred.reject();
         });
       return deferred.promise;

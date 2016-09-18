@@ -103,5 +103,10 @@ app.get('/home', requireLogin, function (req, res) {
   res.sendFile(path.join(__dirname, 'public', 'views', 'index.html'));
 });
 
+app.get('/logout', function (req, res) {
+  req.session.reset();
+  res.sendFile(path.join(__dirname, 'public', 'views', 'index.html'));
+});
+
 app.listen(8082);
 console.log("Listening on port 8082");

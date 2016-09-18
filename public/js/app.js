@@ -20,6 +20,9 @@ app.config(function ($routeProvider, $locationProvider) {
       data : {
         pageTitle: "FlashKardz® | Home"
       }
+    })
+    .when("/logout", {
+      redirectTo: "/login"
     });
     // .otherwise({
     //   redirectTo: "/login"
