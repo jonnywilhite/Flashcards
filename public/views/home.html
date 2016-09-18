@@ -3,6 +3,33 @@
   <h2><small>You have {{home.flashcards.length}} flashcards saved</small></h2>
 
   <br>
+  <div class="row">
+    <div class="well col-sm-offset-3 col-sm-6" id="flashcard-area">
+      <div class="text-center">
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <p id="current-question" class="text-center" ng-show="home.questionDisplayed">{{home.currentQuestion}}</p>
+        <p id="current-answer" class="text-center" ng-show="home.answerDisplayed">{{home.currentAnswer}}</p>
+        <br>
+        <button class="btn btn-info" ng-hide="home.flashcardDisplayed" ng-click="home.showQuestion()">Quiz Me!</button>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+      </div>
+    </div>
+  </div>
+  <div class="text-center">
+    <button class="btn btn-warning" ng-show="home.questionDisplayed" ng-click="home.showAnswer()">Show Answer</button>
+    <button class="btn btn-warning" ng-show="home.answerDisplayed" ng-click="home.showQuestion()">Show Next Question</button>
+  </div>
+
+  <br>
   <br>
   <button class="btn btn-danger" ng-click="home.logout()">Log Out</button>
 </div>
