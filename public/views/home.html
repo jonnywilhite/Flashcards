@@ -37,7 +37,18 @@
     </div>
   </div>
   <div id="edit-div" style="display: none">
-    <p>Edit stuff here</p>
+    <table class="table">
+      <tr>
+        <th><input type="checkbox" id="check-all" ng-click="home.checkUncheckAll()"></th>
+        <th>Question</th>
+        <th>Answer</th>
+      </tr>
+      <tr ng-repeat="card in home.flashcards">
+        <td><input type="checkbox" class="my-checkbox" ng-click="home.checkUncheck()"></td>
+        <td ng-click="home.editCard(card)">{{card.question}}</td>
+        <td ng-click="home.editCard(card)">{{card.answer}}</td>
+      </tr>
+    </table>
   </div>
 
   <br>

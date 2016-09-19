@@ -68,7 +68,45 @@ angular.module('app').controller('homeCtrl', function($http, $location, $cookies
     homeCtrlData.answerDisplayed = false;
     homeCtrlData.currentQuestion = "";
     homeCtrlData.currentAnswer = "";
+    document.getElementById('check-all').checked = false;
+    var checkboxes = document.getElementsByClassName('my-checkbox');
+    for (var i = 0; i < checkboxes.length; i++) {
+      checkboxes[i].checked = false;
+    }
   };
   homeCtrlData.reset();
+
+  homeCtrlData.checkUncheck = function () {
+    var checkboxes = document.getElementsByClassName('my-checkbox');
+    var checkAllButton = document.getElementById('check-all');
+    var anyChecked = false;
+    var allChecked = true;
+    for (var i = 0; i < checkboxes.length; i++) {
+      if (checkboxes[i].checked) {
+        anyChecked = true;
+      } else {
+        allChecked = false;
+      }
+    }
+
+    if (allChecked) {
+      checkAllButton.checked = true;
+    } else {
+      checkAllButton.checked = false;
+    }
+  };
+
+  homeCtrlData.checkUncheckAll = function () {
+    var checkboxes = document.getElementsByClassName('my-checkbox');
+    if (document.getElementById('check-all').checked) {
+      for (var i = 0; i < checkboxes.length; i++) {
+        checkboxes[i].checked = true;
+      }
+    } else {
+      for (var i = 0; i < checkboxes.length; i++) {
+        checkboxes[i].checked = false;
+      }
+    }
+  };
 
 });
