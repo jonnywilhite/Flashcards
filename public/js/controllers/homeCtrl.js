@@ -125,16 +125,26 @@ angular.module('app').controller('homeCtrl', function($http, $location, $cookies
   };
 
   homeCtrlData.editCard = function (flashcard) {
+    console.log('edit');
     if (homeCtrlData.selected) {
       for (var i = 0; i < homeCtrlData.flashcards.length; i++) {
         if (homeCtrlData.flashcards[i]._id === homeCtrlData.selected._id) {
           homeCtrlData.flashcards[i] = homeCtrlData.selected;
         }
       }
+      var found = false;
+      var indexFound = -1;
       for (var i = 0; i < homeCtrlData.dirtyCards.length; i++) {
         if (homeCtrlData.dirtyCards[i]._id === homeCtrlData.selected._id) {
-          homeCtrlData.dirtyCards.push(homeCtrlData.selected);
+          found = true;
+          indexFound = i;
         }
+      }
+      if (!found) {
+        homeCtrlData.dirtyCards.push(homeCtrlData.selected);
+      } else {
+        homeCtrlData.dirtyCards.splice(indexFound, 1);
+        homeCtrlData.dirtyCards.push(homeCtrlData.selected);
       }
 
     }
