@@ -68,6 +68,9 @@ angular.module('app').controller('homeCtrl', function($http, $location, $cookies
     homeCtrlData.answerDisplayed = false;
     homeCtrlData.currentQuestion = "";
     homeCtrlData.currentAnswer = "";
+    homeCtrlData.selectedCount = 0;
+    homeCtrlData.selected = "";
+    homeCtrlData.dirtyCards = [];
     document.getElementById('check-all').checked = false;
     var checkboxes = document.getElementsByClassName('my-checkbox');
     for (var i = 0; i < checkboxes.length; i++) {
@@ -81,8 +84,10 @@ angular.module('app').controller('homeCtrl', function($http, $location, $cookies
     var checkAllButton = document.getElementById('check-all');
     var anyChecked = false;
     var allChecked = true;
+    homeCtrlData.selectedCount = 0;
     for (var i = 0; i < checkboxes.length; i++) {
       if (checkboxes[i].checked) {
+        homeCtrlData.selectedCount++;
         anyChecked = true;
       } else {
         allChecked = false;
@@ -99,14 +104,45 @@ angular.module('app').controller('homeCtrl', function($http, $location, $cookies
   homeCtrlData.checkUncheckAll = function () {
     var checkboxes = document.getElementsByClassName('my-checkbox');
     if (document.getElementById('check-all').checked) {
+      homeCtrlData.selectedCount = homeCtrlData.flashcards.length;
       for (var i = 0; i < checkboxes.length; i++) {
         checkboxes[i].checked = true;
       }
     } else {
+      homeCtrlData.selectedCount = 0;
       for (var i = 0; i < checkboxes.length; i++) {
         checkboxes[i].checked = false;
       }
     }
+  };
+
+  homeCtrlData.getTemplate = function (flashcard) {
+    if (flashcard._id === homeCtrlData.selected._id) {
+      return 'edit';
+    } else {
+      return 'display';
+    }
+  };
+
+  homeCtrlData.editCard = function (flashcard) {
+    if (homeCtrlData.selected) {
+      for (var i = 0; i < homeCtrlData.flashcards.length; i++) {
+        if (homeCtrlData.flashcards[i]._id === homeCtrlData.selected._id) {
+          homeCtrlData.flashcards[i] = homeCtrlData.selected;
+        }
+      }
+      for (var i = 0; i < homeCtrlData.dirtyCards.length; i++) {
+        if (homeCtrlData.dirtyCards[i]._id === homeCtrlData.selected._id) {
+          homeCtrlData.dirtyCards.push(homeCtrlData.selected);
+        }
+      }
+
+    }
+    homeCtrlData.selected = angular.copy(flashcard);
+  };
+
+  homeCtrlData.saveCards = function () {
+    console.log(homeCtrlData.dirtyCards);
   };
 
 });

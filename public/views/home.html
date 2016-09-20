@@ -43,15 +43,35 @@
         <th>Question</th>
         <th>Answer</th>
       </tr>
-      <tr ng-repeat="card in home.flashcards">
-        <td><input type="checkbox" class="my-checkbox" ng-click="home.checkUncheck()"></td>
-        <td ng-click="home.editCard(card)">{{card.question}}</td>
-        <td ng-click="home.editCard(card)">{{card.answer}}</td>
+      <tr ng-repeat="card in home.flashcards" ng-include="home.getTemplate(card)">
+
       </tr>
     </table>
+    <div class="btn-group" ng-show="home.selected">
+      <button class="btn btn-sm btn-success" ng-click="home.saveCards()">
+        <span class="glyphicon glyphicon-ok"></span>
+        Save Changes
+      </button>
+      <button class="btn btn-sm btn-danger">
+        <span class="glyphicon glyphicon-remove"></span>
+        Cancel
+      </button>
+    </div>
+    <button class="btn btn-danger" ng-show="home.selectedCount">Delete {{home.selectedCount}} row(s)</button>
   </div>
 
   <br>
   <br>
   <button class="btn btn-danger" ng-click="home.logout()">Log Out</button>
 </div>
+<script type="text/ng-template" id="display">
+  <td><input type="checkbox" class="my-checkbox" ng-click="home.checkUncheck()"></td>
+  <td ng-click="home.editCard(card)">{{card.question}}</td>
+  <td ng-click="home.editCard(card)">{{card.answer}}</td>
+</script>
+
+<script type="text/ng-template" id="edit">
+  <td><input type="checkbox" class="my-checkbox" ng-click="home.checkUncheck()"></td>
+  <td><input type="text" class="form-control" ng-model="home.selected.question"/>
+  <td><input type="text" class="form-control" ng-model="home.selected.answer"/>
+</script>
