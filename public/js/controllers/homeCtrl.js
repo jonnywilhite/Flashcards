@@ -162,6 +162,7 @@ angular.module('app').controller('homeCtrl', function($http, $location, $cookies
 
   homeCtrlData.saveCards = function () {
     for (let flashcard of homeCtrlData.dirtyCards) {
+      console.log('ID of card to update: ' + flashcard._id);
       $http.put('/api/flashcards/' + flashcard._id, flashcard)
         .success(function (data) {
           homeCtrlData.getCards();
@@ -169,10 +170,26 @@ angular.module('app').controller('homeCtrl', function($http, $location, $cookies
         .error(function (data) {
           console.log('Error updating cards: ' + data);
         });
-    };
+    }
 
     homeCtrlData.selected = "";
     homeCtrlData.dirtyCards = [];
+  };
+
+  homeCtrlData.deleteCards = function () {
+    var checkboxes = document.getElementsByClassName('my-checkbox');
+    for (let checkbox of checkboxes) {
+      if (checkbox.checked) {
+        $http.delete('api/flashcards/' + checkbox.id)
+          .success(function (data) {
+            homeCtrlData.getCards();
+            homeCtrlData.reset();
+          })
+          .error(function (data) {
+            console.log('Error deleting cards: '+ data);
+          });
+      }
+    }
   };
 
 });

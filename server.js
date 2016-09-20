@@ -20,7 +20,7 @@ mongoose.connect('mongodb://localhost:27017/flashcards');
 
 app.use(session({ //lets you store cookies
   cookieName: 'session',
-  secret: 'spring_beans',
+  secret: 'sdjJkwP4_mlq20be1n_MW1s4',
   duration: 30 * 1000 * 60,
   activeDuration: 5 * 1000 * 60
 }));
@@ -66,7 +66,7 @@ app.get('/api/flashcards', function(req, res) {
 });
 
 app.put('/api/flashcards/:cardKey', function (req, res) {
-  Flashcard.findOne(ObjectId(req.params.cardKey), function (err, flashcard) {
+  Flashcard.findOne({_id: mongoose.Types.ObjectId(req.params.cardKey)}, function (err, flashcard) {
     if (err) {
       res.send(err);
     }
@@ -78,6 +78,16 @@ app.put('/api/flashcards/:cardKey', function (req, res) {
       }
       res.json({message : 'Updated card'});
     });
+  });
+});
+
+app.delete('/api/flashcards/:cardKey', function (req, res) {
+  console.log(req.params.cardKey);
+  Flashcard.remove({_id: mongoose.Types.ObjectId(req.params.cardKey)}, function (err, flashcard) {
+    if (err) {
+      res.send(err);
+    }
+    res.json({message: 'Deleted card'});
   });
 });
 

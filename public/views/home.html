@@ -57,7 +57,7 @@
         Cancel
       </button>
     </div>
-    <button class="btn btn-danger" ng-show="home.selectedCount">Delete {{home.selectedCount}} row(s)</button>
+    <button class="btn btn-danger" ng-show="home.selectedCount" ng-click="home.deleteCards()">Delete {{home.selectedCount}} row(s)</button>
   </div>
 
   <br>
@@ -65,13 +65,13 @@
   <button class="btn btn-danger" ng-click="home.logout()">Log Out</button>
 </div>
 <script type="text/ng-template" id="display">
-  <td><input type="checkbox" class="my-checkbox" ng-click="home.checkUncheck()" ng-disabled="home.selected"></td>
+  <td><input id="{{card._id}}" type="checkbox" class="my-checkbox" ng-click="home.checkUncheck()" ng-disabled="home.selected"></td>
   <td ng-click="home.editCard(card)">{{card.question}}</td>
   <td ng-click="home.editCard(card)">{{card.answer}}</td>
 </script>
 
 <script type="text/ng-template" id="edit">
-  <td><input type="checkbox" class="my-checkbox" ng-click="home.checkUncheck()" ng-disabled="home.selected"></td>
+  <td><input id="{{card._id}}" type="checkbox" class="my-checkbox" ng-click="home.checkUncheck()" ng-disabled="home.selected"></td>
   <td><input type="text" class="form-control" ng-model="home.selected.question"/>
   <td><input type="text" class="form-control" ng-model="home.selected.answer"/>
 </script>
