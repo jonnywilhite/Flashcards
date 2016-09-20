@@ -128,6 +128,13 @@ angular.module('app').controller('homeCtrl', function($http, $location, $cookies
   };
 
   homeCtrlData.editCard = function (flashcard) {
+    var checkboxes = document.getElementsByClassName('my-checkbox');
+    document.getElementById('check-all').checked = false;
+    for (let checkbox of checkboxes) {
+      checkbox.checked = false;
+    }
+    homeCtrlData.selectedCount = 0;
+
     if (homeCtrlData.selected) {
       for (var i = 0; i < homeCtrlData.flashcards.length; i++) {
         if (homeCtrlData.flashcards[i]._id === homeCtrlData.selected._id) {
