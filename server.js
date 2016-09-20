@@ -2,6 +2,7 @@
 
 const express = require('express');
 const mongoose = require('mongoose');
+const ObjectId = require('mongoose').Schema.ObjectId;
 const bcrypt = require('bcrypt'); //hashing passwords
 const bodyParser = require('body-parser'); //still not sure what this does
 const methodOverride = require('method-override'); //or this
@@ -61,6 +62,22 @@ app.get('/api/flashcards', function(req, res) {
       res.send(err);
     }
     res.json(flashcards);
+  });
+});
+
+app.put('/api/flashcards/:cardKey', function (req, res) {
+  Flashcard.findOne(ObjectId(req.params.cardKey), function (err, flashcard) {
+    if (err) {
+      res.send(err);
+    }
+    flashcard.question = req.body.question;
+    flashcard.answer = req.body.answer;
+    flashcard.save(function (err) {
+      if (err) {
+        res.send(err);
+      }
+      res.json({message : 'Updated card'});
+    });
   });
 });
 

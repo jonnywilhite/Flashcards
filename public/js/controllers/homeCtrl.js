@@ -8,13 +8,16 @@ angular.module('app').controller('homeCtrl', function($http, $location, $cookies
   homeCtrlData.editViewShown = false;
   homeCtrlData.username = (AuthService.currentUser() && AuthService.currentUser().username) || $cookies.get('username');
 
-  $http.get('/api/flashcards')
-    .success(function(data) {
-      homeCtrlData.flashcards = data;
-    })
-    .error(function(data) {
-      console.log('Error getting flashcards: ' + data);
-    });
+  homeCtrlData.getCards = function () {
+    $http.get('/api/flashcards')
+      .success(function(data) {
+        homeCtrlData.flashcards = data;
+      })
+      .error(function(data) {
+        console.log('Error getting flashcards: ' + data);
+      });
+  };
+  homeCtrlData.getCards();
 
   homeCtrlData.showQuestion = function () {
     if (homeCtrlData.fcIndex == homeCtrlData.flashcards.length) {
@@ -73,8 +76,8 @@ angular.module('app').controller('homeCtrl', function($http, $location, $cookies
     homeCtrlData.dirtyCards = [];
     document.getElementById('check-all').checked = false;
     var checkboxes = document.getElementsByClassName('my-checkbox');
-    for (var i = 0; i < checkboxes.length; i++) {
-      checkboxes[i].checked = false;
+    for (let checkbox of checkboxes) {
+      checkbox.checked = false;
     }
   };
   homeCtrlData.reset();
@@ -85,8 +88,8 @@ angular.module('app').controller('homeCtrl', function($http, $location, $cookies
     var anyChecked = false;
     var allChecked = true;
     homeCtrlData.selectedCount = 0;
-    for (var i = 0; i < checkboxes.length; i++) {
-      if (checkboxes[i].checked) {
+    for (let checkbox of checkboxes) {
+      if (checkbox.checked) {
         homeCtrlData.selectedCount++;
         anyChecked = true;
       } else {
@@ -105,13 +108,13 @@ angular.module('app').controller('homeCtrl', function($http, $location, $cookies
     var checkboxes = document.getElementsByClassName('my-checkbox');
     if (document.getElementById('check-all').checked) {
       homeCtrlData.selectedCount = homeCtrlData.flashcards.length;
-      for (var i = 0; i < checkboxes.length; i++) {
-        checkboxes[i].checked = true;
+      for (let checkbox of checkboxes) {
+        checkbox.checked = true;
       }
     } else {
       homeCtrlData.selectedCount = 0;
-      for (var i = 0; i < checkboxes.length; i++) {
-        checkboxes[i].checked = false;
+      for (let checkbox of checkboxes) {
+        checkbox.checked = false;
       }
     }
   };
@@ -125,7 +128,6 @@ angular.module('app').controller('homeCtrl', function($http, $location, $cookies
   };
 
   homeCtrlData.editCard = function (flashcard) {
-    console.log('edit');
     if (homeCtrlData.selected) {
       for (var i = 0; i < homeCtrlData.flashcards.length; i++) {
         if (homeCtrlData.flashcards[i]._id === homeCtrlData.selected._id) {
@@ -152,7 +154,18 @@ angular.module('app').controller('homeCtrl', function($http, $location, $cookies
   };
 
   homeCtrlData.saveCards = function () {
-    console.log(homeCtrlData.dirtyCards);
+    for (let flashcard of homeCtrlData.dirtyCards) {
+      $http.put('/api/flashcards/' + flashcard._id, flashcard)
+        .success(function (data) {
+          homeCtrlData.getCards();
+        })
+        .error(function (data) {
+          console.log('Error updating cards: ' + data);
+        });
+    };
+
+    homeCtrlData.selected = "";
+    homeCtrlData.dirtyCards = [];
   };
 
 });
