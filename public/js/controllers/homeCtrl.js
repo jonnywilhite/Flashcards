@@ -17,7 +17,6 @@ angular.module('app').controller('homeCtrl', function($http, $location, $cookies
         console.log('Error getting flashcards: ' + data);
       });
   };
-  homeCtrlData.getCards();
 
   homeCtrlData.showQuestion = function () {
     if (homeCtrlData.fcIndex == homeCtrlData.flashcards.length) {
@@ -218,7 +217,7 @@ angular.module('app').controller('homeCtrl', function($http, $location, $cookies
     homeCtrlData.newCard.user = homeCtrlData.username;
     $http.post('api/flashcards', homeCtrlData.newCard)
       .success(function (data) {
-        
+
       })
       .error(function (data) {
         console.log('Error saving card: ' + data);
