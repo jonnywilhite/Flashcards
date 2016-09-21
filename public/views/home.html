@@ -10,9 +10,10 @@
 
   <br>
   <div id="quiz-div">
-    <div class="row" style="display: inline">
-      <div class="well col-sm-offset-3 col-sm-6 flashcard">
+    <div class="row text-center" style="display: inline">
+      <div class="well flashcard" ng-click="home.showNext()">
         <div class="text-center">
+          <br>
           <br>
           <br>
           <br>
@@ -20,7 +21,6 @@
           <br>
           <p id="current-question" class="text-center" ng-show="home.questionDisplayed">{{home.currentQuestion}}</p>
           <p id="current-answer" class="text-center" ng-show="home.answerDisplayed">{{home.currentAnswer}}</p>
-          <br>
           <button class="btn btn-info" ng-hide="home.flashcardDisplayed" ng-click="home.showQuestion()">Quiz Me!</button>
           <br>
           <br>

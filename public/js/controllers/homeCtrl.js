@@ -36,6 +36,16 @@ angular.module('app').controller('homeCtrl', function($http, $location, $cookies
     homeCtrlData.fcIndex++;
   };
 
+  homeCtrlData.showNext = function () {
+    if (homeCtrlData.flashcardDisplayed) {
+      if (homeCtrlData.questionDisplayed) {
+        homeCtrlData.showAnswer();
+      } else {
+        homeCtrlData.showQuestion();
+      }
+    }
+  };
+
   homeCtrlData.logout = function () {
     $http.get('/logout')
       .success(function (data) {
