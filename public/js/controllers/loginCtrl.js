@@ -24,4 +24,8 @@ angular.module('app').controller('loginCtrl', function ($http, $location, $cooki
         loginCtrlData.loggedInUser = {};
       });
   };
+
+  loginCtrlData.registerNew = function () {
+    $location.path('/register');
+  };
 });

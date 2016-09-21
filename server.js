@@ -134,6 +134,10 @@ app.get('/', function(req, res) {
   res.sendFile(path.join(__dirname, 'public', 'views', 'index.html'));
 });
 
+app.get('/register', function (req, res) {
+  res.sendFile(path.join(__dirname, 'public', 'views', 'index.html'));
+});
+
 app.get('/login', function(req, res) {
   res.sendFile(path.join(__dirname, 'public', 'views', 'index.html'));
 });

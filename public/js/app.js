@@ -21,6 +21,13 @@ app.config(function ($routeProvider, $locationProvider, $httpProvider) {
         pageTitle: "FlashKardz® | Home"
       }
     })
+    .when("/register", {
+      templateUrl : "views/register.html",
+      controller : "registerCtrl",
+      data : {
+        pageTitle: "FlashKardz® | Register"
+      }
+    })
     .when("/logout", {
       redirectTo: "/login"
     });
@@ -34,7 +41,7 @@ app.config(function ($routeProvider, $locationProvider, $httpProvider) {
 .run(function ($cookies, $rootScope, $location) {
   $rootScope.$on('$routeChangeStart', function (event, next, current) {
     if (!$cookies.get('username')) {
-      if (next.templateUrl == 'views/login.html') {
+      if (next.templateUrl == 'views/login.html' || next.templateUrl == 'views/register.html') {
 
       } else {
         $location.path('/login');

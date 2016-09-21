@@ -1,0 +1,41 @@
+<div ng-controller="registerCtrl as reg">
+  <h2 class="text-center">Register New User</h2>
+  <h2 class="text-center"><small>Please fill out the required fields</small></h2>
+  <br>
+  <form>
+    <div class="form-group row">
+      <label for="new-username" class="col-sm-2 col-lg-1 col-lg-offset-2 col-form-label">Username<span style="color:red">*</span></label>
+      <div class="col-xs-11 col-sm-8 col-lg-7">
+        <input class="form-control" type="text" placeholder="Username must be unique" ng-model="reg.newUsername" ng-blur="reg.checkUsername()" autocomplete="off" id="new-username">
+      </div>
+      <p ng-show="reg.usernameValid"><span class="glyphicon glyphicon-ok" style="color:green"></span></p>
+      <p ng-show="!reg.usernameValid && reg.usernameTouched"><span class="glyphicon glyphicon-remove" style="color:red"></span></p>
+    </div>
+
+    <div class="form-group row">
+      <label for="new-password" class="col-sm-2 col-lg-1 col-lg-offset-2 col-form-label">Password<span style="color:red">*</span></label>
+      <div class="col-xs-11 col-sm-8 col-lg-7">
+        <input class="form-control" type="password" placeholder="Password must contain letters and numbers" ng-model="reg.newPassword" ng-blur="reg.checkPassword()" id="new-password">
+      </div>
+      <p ng-show="reg.passwordValid"><span class="glyphicon glyphicon-ok" style="color:green"></span></p>
+      <p ng-show="!reg.passwordValid && reg.passwordTouched"><span class="glyphicon glyphicon-remove" style="color:red"></span></p>
+    </div>
+
+    <div class="form-group row">
+      <label for="new-password-retype" class="col-sm-2 col-lg-1 col-lg-offset-2 col-form-label">Retype Password<span style="color:red">*</span></label>
+      <div class="col-xs-11 col-sm-8 col-lg-7">
+        <input class="form-control" type="password" placeholder="Passwords must match" ng-model="reg.newPasswordRetype" ng-blur="reg.checkPasswordRetype()" id="new-password-retype">
+      </div>
+      <p ng-show="reg.passwordRetypeValid"><span class="glyphicon glyphicon-ok" style="color:green"></span></p>
+      <p ng-show="!reg.passwordRetypeValid && reg.passwordRetypeTouched"><span class="glyphicon glyphicon-remove" style="color:red"></span></p>
+    </div>
+
+    <div class="text-center">
+      <button class="btn btn-primary" ng-click="reg.registerUser()">
+        <span class="glyphicon glyphicon-check"></span>
+        Sign Me Up!
+      </button>
+    </div>
+
+  </form>
+</div>
