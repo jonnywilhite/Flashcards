@@ -2,7 +2,7 @@
 
 var app = angular.module('app', ['ngRoute', 'ngPageTitle', 'ngCookies']);
 
-app.config(function ($routeProvider, $locationProvider) {
+app.config(function ($routeProvider, $locationProvider, $httpProvider) {
   $routeProvider
     .when("/", {
       redirectTo : "/login"
@@ -29,6 +29,7 @@ app.config(function ($routeProvider, $locationProvider) {
     // });
 
   $locationProvider.html5Mode(true);
+  $httpProvider.interceptors.push('httpRequestInterceptor');
 })
 .run(function ($cookies, $rootScope, $location) {
   $rootScope.$on('$routeChangeStart', function (event, next, current) {

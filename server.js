@@ -4,8 +4,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 const ObjectId = require('mongoose').Schema.ObjectId;
 const bcrypt = require('bcrypt'); //hashing passwords
-const bodyParser = require('body-parser'); //still not sure what this does
-const methodOverride = require('method-override'); //or this
+const bodyParser = require('body-parser'); //probably used for parsing request bodies
+const methodOverride = require('method-override'); //still not sure what this does
 const morgan = require('morgan'); //logging
 const path = require('path'); //could probably do without this
 const session = require('client-sessions'); //cookies
@@ -49,7 +49,6 @@ function requireLogin(req, res, next) {
   }
 }
 
-app.use(express.static('public')); //lets you serve static files
 app.use(morgan('dev')); //logging
 app.use(bodyParser.urlencoded({'extended':'true'}));
 app.use(bodyParser.json());
@@ -147,6 +146,20 @@ app.get('/logout', function (req, res) {
   req.session.reset();
   res.sendFile(path.join(__dirname, 'public', 'views', 'index.html'));
 });
+
+app.use(function (req, res, next) {
+  if (req.path.indexOf('/js') === 0 || req.path.indexOf('/css') === 0 || req.path.indexOf('/img') === 0) {
+    next();
+  } else {
+    if (!req.headers['awesome-header']) {
+      res.json({message: "Nice try"});
+    } else {
+      next();
+    }
+  }
+});
+
+app.use(express.static(__dirname + '/public')); //lets you serve static files
 
 app.listen(8082);
 console.log("Listening on port 8082");
