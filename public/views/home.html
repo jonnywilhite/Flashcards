@@ -46,6 +46,9 @@
       <tr ng-repeat="card in home.flashcards" ng-include="home.getTemplate(card)">
 
       </tr>
+      <tr ng-hide="home.selected">
+
+      </tr>
     </table>
     <div class="btn-group" ng-show="home.selected">
       <button class="btn btn-sm btn-success" ng-click="home.saveCards()">
@@ -57,7 +60,7 @@
         Cancel
       </button>
     </div>
-    <button class="btn btn-danger" ng-show="home.selectedCount" ng-click="home.deleteCards()">Delete {{home.selectedCount}} row(s)</button>
+    <button class="btn btn-danger" ng-show="home.checkedCount" ng-click="home.deleteCards()">Delete {{home.checkedCount}} row(s)</button>
   </div>
 
   <br>

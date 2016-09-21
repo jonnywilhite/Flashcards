@@ -71,9 +71,10 @@ angular.module('app').controller('homeCtrl', function($http, $location, $cookies
     homeCtrlData.answerDisplayed = false;
     homeCtrlData.currentQuestion = "";
     homeCtrlData.currentAnswer = "";
-    homeCtrlData.selectedCount = 0;
+    homeCtrlData.checkedCount = 0;
     homeCtrlData.selected = "";
     homeCtrlData.dirtyCards = [];
+    homeCtrlData.getCards();
     document.getElementById('check-all').checked = false;
     var checkboxes = document.getElementsByClassName('my-checkbox');
     for (let checkbox of checkboxes) {
@@ -87,10 +88,10 @@ angular.module('app').controller('homeCtrl', function($http, $location, $cookies
     var checkAllButton = document.getElementById('check-all');
     var anyChecked = false;
     var allChecked = true;
-    homeCtrlData.selectedCount = 0;
+    homeCtrlData.checkedCount = 0;
     for (let checkbox of checkboxes) {
       if (checkbox.checked) {
-        homeCtrlData.selectedCount++;
+        homeCtrlData.checkedCount++;
         anyChecked = true;
       } else {
         allChecked = false;
@@ -107,12 +108,12 @@ angular.module('app').controller('homeCtrl', function($http, $location, $cookies
   homeCtrlData.checkUncheckAll = function () {
     var checkboxes = document.getElementsByClassName('my-checkbox');
     if (document.getElementById('check-all').checked) {
-      homeCtrlData.selectedCount = homeCtrlData.flashcards.length;
+      homeCtrlData.checkedCount = homeCtrlData.flashcards.length;
       for (let checkbox of checkboxes) {
         checkbox.checked = true;
       }
     } else {
-      homeCtrlData.selectedCount = 0;
+      homeCtrlData.checkedCount = 0;
       for (let checkbox of checkboxes) {
         checkbox.checked = false;
       }
@@ -133,7 +134,7 @@ angular.module('app').controller('homeCtrl', function($http, $location, $cookies
     for (let checkbox of checkboxes) {
       checkbox.checked = false;
     }
-    homeCtrlData.selectedCount = 0;
+    homeCtrlData.checkedCount = 0;
 
     if (homeCtrlData.selected) {
       for (var i = 0; i < homeCtrlData.flashcards.length; i++) {
@@ -141,28 +142,26 @@ angular.module('app').controller('homeCtrl', function($http, $location, $cookies
           homeCtrlData.flashcards[i] = homeCtrlData.selected;
         }
       }
-      var found = false;
-      var indexFound = -1;
-      for (var i = 0; i < homeCtrlData.dirtyCards.length; i++) {
-        if (homeCtrlData.dirtyCards[i]._id === homeCtrlData.selected._id) {
-          found = true;
-          indexFound = i;
-        }
-      }
-      if (!found) {
-        homeCtrlData.dirtyCards.push(homeCtrlData.selected);
-      } else {
-        homeCtrlData.dirtyCards.splice(indexFound, 1);
-        homeCtrlData.dirtyCards.push(homeCtrlData.selected);
-      }
-
     }
     homeCtrlData.selected = angular.copy(flashcard);
+    var found = false;
+    var indexFound = -1;
+    for (var i = 0; i < homeCtrlData.dirtyCards.length; i++) {
+      if (homeCtrlData.dirtyCards[i]._id === homeCtrlData.selected._id) {
+        found = true;
+        indexFound = i;
+      }
+    }
+    if (!found) {
+      homeCtrlData.dirtyCards.push(homeCtrlData.selected);
+    } else {
+      homeCtrlData.dirtyCards.splice(indexFound, 1);
+      homeCtrlData.dirtyCards.push(homeCtrlData.selected);
+    }
   };
 
   homeCtrlData.saveCards = function () {
     for (let flashcard of homeCtrlData.dirtyCards) {
-      console.log('ID of card to update: ' + flashcard._id);
       $http.put('/api/flashcards/' + flashcard._id, flashcard)
         .success(function (data) {
           homeCtrlData.getCards();
