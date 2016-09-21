@@ -21,7 +21,7 @@
           <br>
           <p id="current-question" class="text-center" ng-show="home.questionDisplayed">{{home.currentQuestion}}</p>
           <p id="current-answer" class="text-center" ng-show="home.answerDisplayed">{{home.currentAnswer}}</p>
-          <button class="btn btn-info" ng-hide="home.flashcardDisplayed" ng-click="home.showQuestion()">Quiz Me!</button>
+          <button class="btn btn-info" ng-hide="home.flashcardDisplayed" ng-click="home.showQuestion(); $event.stopPropagation()">Quiz Me!</button>
           <br>
           <br>
           <br>

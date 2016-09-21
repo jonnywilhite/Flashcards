@@ -6,10 +6,6 @@ angular.module('app').controller('loginCtrl', function ($http, $location, $cooki
   loginCtrlData.loggedInUser = {username: "", password: ""};
   loginCtrlData.errorMsg = "";
 
-  // if (loginCtrlData.loggedInUser || $cookies.get('session')) {
-  //   $location.path('/home');
-  // }
-
   loginCtrlData.authenticate = function (user) {
     $http.post('/login', user)
       .success(function (data) {
