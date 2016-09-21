@@ -152,7 +152,7 @@ app.use(function (req, res, next) {
     next();
   } else {
     if (!req.headers['awesome-header']) {
-      res.json({message: "Nice try"});
+      res.json({message: "Nothing to see here"});
     } else {
       next();
     }
