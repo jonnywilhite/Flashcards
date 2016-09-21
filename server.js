@@ -57,12 +57,16 @@ app.use(bodyParser.json({type: 'application/vnd.api+json'}));
 app.use(methodOverride());
 
 app.get('/api/flashcards', function(req, res) {
-  Flashcard.find({user: req.session.user.username}, function(err, flashcards) {  //mongo schemas come with .find and .findOne methods
-    if (err) {
-      res.send(err);
-    }
-    res.json(flashcards);
-  });
+  if (req.session.user) {
+    Flashcard.find({user: req.session.user.username}, function(err, flashcards) {  //mongo schemas come with .find and .findOne methods
+      if (err) {
+        res.send(err);
+      }
+      res.json(flashcards);
+    });
+  } else {
+    res.json({message: "Please log in to view your flashcards. Kudos for being crafty but these cards are private!!"});
+  }
 });
 
 app.post('/api/flashcards', function (req, res) {
