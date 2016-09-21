@@ -65,6 +65,15 @@ app.get('/api/flashcards', function(req, res) {
   });
 });
 
+app.post('/api/flashcards', function (req, res) {
+  Flashcard.create({question: req.body.question, answer: req.body.answer, user: req.body.user}, function(err, flashcard) {
+    if (err) {
+      res.send(err);
+    }
+    res.json(flashcard)
+  });
+});
+
 app.put('/api/flashcards/:cardKey', function (req, res) {
   Flashcard.findOne({_id: mongoose.Types.ObjectId(req.params.cardKey)}, function (err, flashcard) {
     if (err) {

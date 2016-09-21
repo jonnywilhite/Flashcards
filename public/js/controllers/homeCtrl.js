@@ -74,6 +74,8 @@ angular.module('app').controller('homeCtrl', function($http, $location, $cookies
     homeCtrlData.checkedCount = 0;
     homeCtrlData.selected = "";
     homeCtrlData.dirtyCards = [];
+    homeCtrlData.isAdding = false;
+    homeCtrlData.newCard = {};
     homeCtrlData.getCards();
     document.getElementById('check-all').checked = false;
     var checkboxes = document.getElementsByClassName('my-checkbox');
@@ -128,7 +130,16 @@ angular.module('app').controller('homeCtrl', function($http, $location, $cookies
     }
   };
 
+  homeCtrlData.getNewCardTemplate = function () {
+    if (homeCtrlData.isAdding) {
+      return 'edit-new';
+    } else {
+      return 'display-new';
+    }
+  };
+
   homeCtrlData.editCard = function (flashcard) {
+    homeCtrlData.isAdding = false;
     var checkboxes = document.getElementsByClassName('my-checkbox');
     document.getElementById('check-all').checked = false;
     for (let checkbox of checkboxes) {
@@ -173,6 +184,7 @@ angular.module('app').controller('homeCtrl', function($http, $location, $cookies
 
     homeCtrlData.selected = "";
     homeCtrlData.dirtyCards = [];
+    homeCtrlData.newCard = {};
   };
 
   homeCtrlData.deleteCards = function () {
@@ -189,6 +201,30 @@ angular.module('app').controller('homeCtrl', function($http, $location, $cookies
           });
       }
     }
+  };
+
+  homeCtrlData.addNewRow = function () {
+    homeCtrlData.isAdding = true;
+
+    var checkboxes = document.getElementsByClassName('my-checkbox');
+    document.getElementById('check-all').checked = false;
+    for (let checkbox of checkboxes) {
+      checkbox.checked = false;
+    }
+    homeCtrlData.checkedCount = 0;
+  };
+
+  homeCtrlData.saveNewCard = function () {
+    homeCtrlData.newCard.user = homeCtrlData.username;
+    $http.post('api/flashcards', homeCtrlData.newCard)
+      .success(function (data) {
+        
+      })
+      .error(function (data) {
+        console.log('Error saving card: ' + data);
+      });
+
+    homeCtrlData.reset();
   };
 
 });
