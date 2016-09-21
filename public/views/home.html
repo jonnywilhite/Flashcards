@@ -37,7 +37,7 @@
     </div>
   </div>
   <div id="edit-div" style="display: none">
-    <table class="table">
+    <table class="table my-fixed">
       <tr>
         <th><input type="checkbox" id="check-all" ng-click="home.checkUncheckAll()" ng-disabled="home.selected || home.isAdding"></th>
         <th>Question</th>
@@ -70,7 +70,7 @@
         Cancel
       </button>
     </div>
-    <button class="btn btn-danger" ng-show="home.checkedCount" ng-click="home.deleteCards()">Delete {{home.checkedCount}} row(s)</button>
+    <button class="btn btn-sm btn-danger" ng-show="home.checkedCount" ng-click="home.deleteCards()">Delete {{home.checkedCount}} row(s)</button>
   </div>
 
   <br>
