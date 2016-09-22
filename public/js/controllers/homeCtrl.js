@@ -224,7 +224,6 @@ angular.module('app').controller('homeCtrl', function($http, $location, $cookies
   };
 
   homeCtrlData.saveNewCard = function () {
-    homeCtrlData.newCard.user = homeCtrlData.username;
     $http.post('api/flashcards', homeCtrlData.newCard)
       .success(function (data) {
 

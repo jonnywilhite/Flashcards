@@ -69,19 +69,21 @@ app.get('/api/flashcards', function(req, res) {
 });
 
 app.post('/api/flashcards', function (req, res) {
-  Flashcard.create({
-    question: req.body.question,
-    answer: req.body.answer,
-    user: req.body.user,
-    firstName: req.body.firstName,
-    lastName: req.body.lastName
-  }, function(err, flashcard) {
-      if (err) {
-        res.send(err);
+  if (req.session.user) {
+    Flashcard.create({
+      question: req.body.question,
+      answer: req.body.answer,
+      user: req.session.user.username,
+    }, function(err, flashcard) {
+        if (err) {
+          res.send(err);
+        }
+        res.json(flashcard);
       }
-      res.json(flashcard);
-    }
-  );
+    );
+  } else {
+    res.json({message: "Please log in to add flashcards"});
+  }
 });
 
 app.put('/api/flashcards/:cardKey', function (req, res) {
