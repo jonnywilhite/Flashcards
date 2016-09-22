@@ -1,5 +1,5 @@
 {
-  "name": "flashcards",
+  "name": "eflashcards",
   "version": "0.2.0",
   "description": "MEAN stack application allowing users to store flashcards",
   "main": "app.js",
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/jonnywilhite/Flashcards.git"
+    "url": "git://github.com/jonnywilhite/eFlashcards.git"
   },
   "keywords": [
     "npm"
@@ -16,9 +16,9 @@
   "author": "Jonathan Wilhite",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/jonnywilhite/Flashcards/issues"
+    "url": "https://github.com/jonnywilhite/eFlashcards/issues"
   },
-  "homepage": "https://github.com/jonnywilhite/Flashcards#readme",
+  "homepage": "https://github.com/jonnywilhite/eFlashcards#readme",
   "dependencies": {
     "bcrypt": "^0.8.7",
     "body-parser": "^1.15.2",
