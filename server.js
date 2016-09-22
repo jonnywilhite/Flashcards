@@ -106,7 +106,7 @@ app.get('/api/users/:username', function (req, res) {
   if (!req.headers['awesome-header']) {
     res.json({message: "Nothing to see here"});
   } else {
-    User.findOne({ username: req.params.username }, function (err, user) {
+    User.findOne({ usernameLower: req.params.username.toLowerCase() }, function (err, user) {
       if (err) {
         res.send(err);
       }
@@ -122,7 +122,8 @@ app.get('/api/users/:username', function (req, res) {
 app.post('/api/users', function (req, res) {
   var newUser = new User({
     username: req.body.username,
-    password: req.body.password
+    password: req.body.password,
+    usernameLower: req.body.username.toLowerCase()
   });
   newUser.save(function (err, user) {
     if (err) {
@@ -134,7 +135,7 @@ app.post('/api/users', function (req, res) {
 
 app.post('/login', function (req, res) {
 
-  User.findOne({ username: req.body.username }, function (err, user) {
+  User.findOne({ usernameLower: req.body.username.toLowerCase() }, function (err, user) {
     if (err) {
       res.send(err);
     }
