@@ -11,29 +11,26 @@ app.config(function ($routeProvider, $locationProvider, $httpProvider) {
       templateUrl : "views/login.html",
       controller : "loginCtrl",
       data : {
-        pageTitle: "FlashKardz® | Login"
+        pageTitle: "eFlashcards | Login"
       }
     })
     .when("/home", {
       templateUrl : "views/home.html",
       controller : "homeCtrl",
       data : {
-        pageTitle: "FlashKardz® | Home"
+        pageTitle: "eFlashcards | Home"
       }
     })
     .when("/register", {
       templateUrl : "views/register.html",
       controller : "registerCtrl",
       data : {
-        pageTitle: "FlashKardz® | Register"
+        pageTitle: "eFlashcards | Register"
       }
     })
     .when("/logout", {
       redirectTo: "/login"
     });
-    // .otherwise({
-    //   redirectTo: "/login"
-    // });
 
   $locationProvider.html5Mode(true);
   $httpProvider.interceptors.push('httpRequestInterceptor');
