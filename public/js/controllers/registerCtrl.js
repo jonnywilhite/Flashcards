@@ -1,6 +1,6 @@
 "use strict";
 
-angular.module('app').controller('registerCtrl', function ($http) {
+angular.module('app').controller('registerCtrl', function ($http, $location, $cookies) {
   const registerCtrlData = this;
 
   registerCtrlData.usernameValid = false;
@@ -58,7 +58,8 @@ angular.module('app').controller('registerCtrl', function ($http) {
     };
     $http.post('/api/users', user)
       .success(function (data) {
-        console.log('Created user!! ' + data);
+        $cookies.put('registered', true);
+        $location.path('/login');
       })
       .error(function (data) {
         console.log('Error creating user: ' + data);

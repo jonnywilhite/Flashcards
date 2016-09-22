@@ -1,10 +1,20 @@
 "use strict";
 
-angular.module('app').controller('loginCtrl', function ($http, $location, $cookies, AuthService) {
+angular.module('app').controller('loginCtrl', function ($http, $location, $cookies, $timeout, AuthService) {
   var loginCtrlData = this;
 
   loginCtrlData.loggedInUser = {username: "", password: ""};
   loginCtrlData.errorMsg = "";
+
+  if ($cookies.get('registered')) {
+    loginCtrlData.registeredMsg = "Account created successfully! Happy studying!";
+    $timeout(function () {
+      document.getElementById('register-success').className += " animated fadeOut";
+      $cookies.remove('registered');
+    }, 3000);
+  } else {
+    loginCtrlData.registeredMsg = "";
+  }
 
   loginCtrlData.authenticate = function (user) {
     $http.post('/login', user)
