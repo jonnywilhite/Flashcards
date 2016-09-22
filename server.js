@@ -64,7 +64,7 @@ app.get('/api/flashcards', function(req, res) {
       res.json(flashcards);
     });
   } else {
-    res.json({message: "Please log in to view your flashcards. Kudos for being crafty but these cards are private!!"});
+    res.json({message: "Please log in to view your flashcards"});
   }
 });
 
@@ -94,13 +94,29 @@ app.put('/api/flashcards/:cardKey', function (req, res) {
 });
 
 app.delete('/api/flashcards/:cardKey', function (req, res) {
-  console.log(req.params.cardKey);
   Flashcard.remove({_id: mongoose.Types.ObjectId(req.params.cardKey)}, function (err, flashcard) {
     if (err) {
       res.send(err);
     }
     res.json({message: 'Deleted card'});
   });
+});
+
+app.get('/api/users/:username', function (req, res) {
+  if (!req.headers['awesome-header']) {
+    res.json({message: "Nothing to see here"});
+  } else {
+    User.findOne({ username: req.params.username }, function (err, user) {
+      if (err) {
+        res.send(err);
+      }
+      if (user) {
+        res.json(user.username);
+      } else {
+        res.json(null);
+      }
+    });
+  }
 });
 
 app.post('/login', function (req, res) {
