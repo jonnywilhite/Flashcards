@@ -50,4 +50,18 @@ angular.module('app').controller('registerCtrl', function ($http) {
       registerCtrlData.passwordRetypeValid = false;
     }
   };
+
+  registerCtrlData.registerUser = function () {
+    var user = {
+      username : registerCtrlData.newUsername,
+      password : registerCtrlData.newPassword
+    };
+    $http.post('/api/users', user)
+      .success(function (data) {
+        console.log('Created user!! ' + data);
+      })
+      .error(function (data) {
+        console.log('Error creating user: ' + data);
+      });
+  };
 });
