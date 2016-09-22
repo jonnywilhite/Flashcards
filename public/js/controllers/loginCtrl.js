@@ -22,7 +22,7 @@ angular.module('app').controller('loginCtrl', function ($http, $location, $cooki
 
         if (data) {
           AuthService.setUser(data);
-          $cookies.put('username', data.username);
+          $cookies.put('firstName', data.firstName);
           $location.path('/home');
         } else {
           loginCtrlData.errorMsg = "Login failed. Please try again";

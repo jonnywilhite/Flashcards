@@ -4,9 +4,27 @@
   <br>
   <form>
     <div class="form-group row">
+      <label for="new-first-name" class="col-sm-2 col-lg-1 col-lg-offset-2 col-form-label">First Name<span style="color:red">*</span></label>
+      <div class="col-xs-11 col-sm-8 col-lg-7">
+        <input class="form-control" type="text" placeholder="Name you'd like to be identified by" ng-model="reg.newFirstName" ng-change="reg.checkFirstName()" autocomplete="off" id="new-first-name">
+      </div>
+      <p ng-show="reg.firstNameValid"><span class="glyphicon glyphicon-ok" style="color:green"></span></p>
+      <p ng-show="!reg.firstNameValid && reg.firstNameTouched"><span class="glyphicon glyphicon-remove" style="color:red"></span></p>
+    </div>
+
+    <div class="form-group row">
+      <label for="new-last-name" class="col-sm-2 col-lg-1 col-lg-offset-2 col-form-label">Last Name<span style="color:red">*</span></label>
+      <div class="col-xs-11 col-sm-8 col-lg-7">
+        <input class="form-control" type="text" placeholder="Enter your last name" ng-model="reg.newLastName" ng-change="reg.checkLastName()" autocomplete="off" id="new-last-name">
+      </div>
+      <p ng-show="reg.lastNameValid"><span class="glyphicon glyphicon-ok" style="color:green"></span></p>
+      <p ng-show="!reg.lastNameValid && reg.lastNameTouched"><span class="glyphicon glyphicon-remove" style="color:red"></span></p>
+    </div>
+
+    <div class="form-group row">
       <label for="new-username" class="col-sm-2 col-lg-1 col-lg-offset-2 col-form-label">Username<span style="color:red">*</span></label>
       <div class="col-xs-11 col-sm-8 col-lg-7">
-        <input class="form-control" type="text" placeholder="Username must be unique" ng-model="reg.newUsername" ng-blur="reg.checkUsername()" autocomplete="off" id="new-username">
+        <input class="form-control" type="text" placeholder="Name used to log in. Must be unique" ng-model="reg.newUsername" ng-blur="reg.checkUsername()" autocomplete="off" id="new-username">
       </div>
       <p ng-show="reg.usernameValid"><span class="glyphicon glyphicon-ok" style="color:green"></span></p>
       <p ng-show="!reg.usernameValid && reg.usernameTouched"><span class="glyphicon glyphicon-remove" style="color:red"></span></p>
@@ -31,7 +49,7 @@
     </div>
 
     <div class="text-center">
-      <button class="btn btn-primary" ng-disabled="!reg.usernameValid || !reg.passwordValid || !reg.passwordRetypeValid" ng-click="reg.registerUser()">
+      <button class="btn btn-primary" ng-disabled="!reg.usernameValid || !reg.passwordValid || !reg.passwordRetypeValid || !reg.firstNameValid || !reg.lastNameValid" ng-click="reg.registerUser()">
         <span class="glyphicon glyphicon-check"></span>
         Sign Me Up!
       </button>

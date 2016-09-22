@@ -6,7 +6,7 @@ angular.module('app').controller('homeCtrl', function($http, $location, $cookies
   homeCtrlData.flashcards = [];
   homeCtrlData.quizViewShown = true;
   homeCtrlData.editViewShown = false;
-  homeCtrlData.username = (AuthService.currentUser() && AuthService.currentUser().username) || $cookies.get('username');
+  homeCtrlData.firstName = (AuthService.currentUser() && AuthService.currentUser().firstName) || $cookies.get('firstName');
 
   homeCtrlData.getCards = function () {
     $http.get('/api/flashcards')
@@ -49,11 +49,11 @@ angular.module('app').controller('homeCtrl', function($http, $location, $cookies
   homeCtrlData.logout = function () {
     $http.get('/logout')
       .success(function (data) {
-        $cookies.remove('username');
+        $cookies.remove('firstName');
         $location.path('/logout');
       })
       .error(function (data) {
-        $cookies.remove('username');
+        $cookies.remove('firstName');
         $location.path('/logout');
       });
   };

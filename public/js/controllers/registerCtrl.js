@@ -3,11 +3,15 @@
 angular.module('app').controller('registerCtrl', function ($http, $location, $cookies) {
   const registerCtrlData = this;
 
+  registerCtrlData.firstNameValid = false;
+  registerCtrlData.firstNameTouched = false;
+  registerCtrlData.lastNameValid = false;
+  registerCtrlData.lastNameTouched = false;
   registerCtrlData.usernameValid = false;
-  registerCtrlData.passwordValid = false;
-  registerCtrlData.passwordRetypeValid = false;
   registerCtrlData.usernameTouched = false;
+  registerCtrlData.passwordValid = false;
   registerCtrlData.passwordTouched = false;
+  registerCtrlData.passwordRetypeValid = false;
   registerCtrlData.passwordRetypeTouched = false;
 
   registerCtrlData.checkUsername = function () {
@@ -51,10 +55,31 @@ angular.module('app').controller('registerCtrl', function ($http, $location, $co
     }
   };
 
+  registerCtrlData.checkFirstName = function () {
+    registerCtrlData.firstNameTouched = true;
+    if (registerCtrlData.newFirstName) {
+      registerCtrlData.firstNameValid = true;
+    } else {
+      registerCtrlData.firstNameValid = false;
+    }
+  };
+
+  registerCtrlData.checkLastName = function () {
+    registerCtrlData.lastNameTouched = true;
+    if (registerCtrlData.newLastName) {
+      registerCtrlData.lastNameValid = true;
+    } else {
+      registerCtrlData.lastNameValid = false;
+    }
+  };
+
   registerCtrlData.registerUser = function () {
     var user = {
       username : registerCtrlData.newUsername,
-      password : registerCtrlData.newPassword
+      password : registerCtrlData.newPassword,
+      usernameLower : registerCtrlData.newUsername.toLowerCase(),
+      firstName : registerCtrlData.newFirstName,
+      lastName : registerCtrlData.newLastName
     };
     $http.post('/api/users', user)
       .success(function (data) {

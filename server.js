@@ -20,7 +20,7 @@ mongoose.connect('mongodb://localhost:27017/flashcards');
 
 app.use(session({ //lets you store cookies
   cookieName: 'session',
-  secret: 'sdjJkwP4_mlq20be1n_MW1s4',
+  secret: 'spring_beans',
   duration: 30 * 1000 * 60,
   activeDuration: 5 * 1000 * 60
 }));
@@ -69,12 +69,19 @@ app.get('/api/flashcards', function(req, res) {
 });
 
 app.post('/api/flashcards', function (req, res) {
-  Flashcard.create({question: req.body.question, answer: req.body.answer, user: req.body.user}, function(err, flashcard) {
-    if (err) {
-      res.send(err);
+  Flashcard.create({
+    question: req.body.question,
+    answer: req.body.answer,
+    user: req.body.user,
+    firstName: req.body.firstName,
+    lastName: req.body.lastName
+  }, function(err, flashcard) {
+      if (err) {
+        res.send(err);
+      }
+      res.json(flashcard);
     }
-    res.json(flashcard)
-  });
+  );
 });
 
 app.put('/api/flashcards/:cardKey', function (req, res) {
@@ -123,7 +130,9 @@ app.post('/api/users', function (req, res) {
   var newUser = new User({
     username: req.body.username,
     password: req.body.password,
-    usernameLower: req.body.username.toLowerCase()
+    usernameLower: req.body.usernameLower,
+    firstName: req.body.firstName,
+    lastName: req.body.lastName
   });
   newUser.save(function (err, user) {
     if (err) {

@@ -40,7 +40,7 @@ app.config(function ($routeProvider, $locationProvider, $httpProvider) {
 })
 .run(function ($cookies, $rootScope, $location) {
   $rootScope.$on('$routeChangeStart', function (event, next, current) {
-    if (!$cookies.get('username')) {
+    if (!$cookies.get('firstName')) {
       if (next.templateUrl == 'views/login.html' || next.templateUrl == 'views/register.html') {
 
       } else {
