@@ -21,7 +21,7 @@ mongoose.connect('mongodb://localhost:27017/flashcards');
 app.use(session({ //lets you store cookies
   cookieName: 'session',
   secret: 'spring_beans',
-  duration: 30 * 1000 * 60,
+  duration: 60 * 1000 * 60,
   activeDuration: 5 * 1000 * 60
 }));
 
