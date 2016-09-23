@@ -78,4 +78,8 @@ angular.module('app').controller('registerCtrl', function ($http, $location, $co
         console.log('Error creating user: ' + data);
       });
   };
+
+  registerCtrlData.goBack = function () {
+    $location.path('/login');
+  };
 });
