@@ -171,24 +171,24 @@ app.post('/login', function (req, res) {
 });
 
 app.get('/', function(req, res) {
-  res.sendFile(path.join(__dirname, 'public', 'views', 'index.html'));
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 app.get('/register', function (req, res) {
-  res.sendFile(path.join(__dirname, 'public', 'views', 'index.html'));
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 app.get('/login', function(req, res) {
-  res.sendFile(path.join(__dirname, 'public', 'views', 'index.html'));
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 app.get('/home', requireLogin, function (req, res) {
-  res.sendFile(path.join(__dirname, 'public', 'views', 'index.html'));
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 app.get('/logout', function (req, res) {
   req.session.reset();
-  res.sendFile(path.join(__dirname, 'public', 'views', 'index.html'));
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 app.use(function (req, res, next) {
