@@ -133,8 +133,7 @@ app.post('/api/users', function (req, res) {
     username: req.body.username,
     password: req.body.password,
     usernameLower: req.body.usernameLower,
-    firstName: req.body.firstName,
-    lastName: req.body.lastName
+    firstName: req.body.firstName
   });
   newUser.save(function (err, user) {
     if (err) {

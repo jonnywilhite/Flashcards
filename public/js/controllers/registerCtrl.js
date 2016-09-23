@@ -5,8 +5,6 @@ angular.module('app').controller('registerCtrl', function ($http, $location, $co
 
   registerCtrlData.firstNameValid = false;
   registerCtrlData.firstNameTouched = false;
-  registerCtrlData.lastNameValid = false;
-  registerCtrlData.lastNameTouched = false;
   registerCtrlData.usernameValid = false;
   registerCtrlData.usernameTouched = false;
   registerCtrlData.passwordValid = false;
@@ -64,22 +62,12 @@ angular.module('app').controller('registerCtrl', function ($http, $location, $co
     }
   };
 
-  registerCtrlData.checkLastName = function () {
-    registerCtrlData.lastNameTouched = true;
-    if (registerCtrlData.newLastName) {
-      registerCtrlData.lastNameValid = true;
-    } else {
-      registerCtrlData.lastNameValid = false;
-    }
-  };
-
   registerCtrlData.registerUser = function () {
     var user = {
       username : registerCtrlData.newUsername,
       password : registerCtrlData.newPassword,
       usernameLower : registerCtrlData.newUsername.toLowerCase(),
-      firstName : registerCtrlData.newFirstName,
-      lastName : registerCtrlData.newLastName
+      firstName : registerCtrlData.newFirstName
     };
     $http.post('/api/users', user)
       .success(function (data) {
