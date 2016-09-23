@@ -1,6 +1,6 @@
 {
   "name": "eflashcards",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "MEAN stack application allowing users to store flashcards",
   "main": "app.js",
   "scripts": {
