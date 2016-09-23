@@ -1,7 +1,7 @@
 "use strict";
 
 angular.module('app').controller('registerCtrl', function ($http, $location, $cookies) {
-  const registerCtrlData = this;
+  var registerCtrlData = this;
 
   registerCtrlData.firstNameValid = false;
   registerCtrlData.firstNameTouched = false;

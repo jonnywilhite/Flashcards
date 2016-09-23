@@ -88,8 +88,8 @@ angular.module('app').controller('homeCtrl', function($http, $location, $cookies
     homeCtrlData.getCards();
     document.getElementById('check-all').checked = false;
     var checkboxes = document.getElementsByClassName('my-checkbox');
-    for (let checkbox of checkboxes) {
-      checkbox.checked = false;
+    for (var i = 0; i < checkboxes.length; i++) {
+      checkboxes[i].checked = false;
     }
   };
   homeCtrlData.reset();
@@ -100,8 +100,8 @@ angular.module('app').controller('homeCtrl', function($http, $location, $cookies
     var anyChecked = false;
     var allChecked = true;
     homeCtrlData.checkedCount = 0;
-    for (let checkbox of checkboxes) {
-      if (checkbox.checked) {
+    for (var i = 0; i < checkboxes.length; i++) {
+      if (checkboxes[i].checked) {
         homeCtrlData.checkedCount++;
         anyChecked = true;
       } else {
@@ -120,13 +120,13 @@ angular.module('app').controller('homeCtrl', function($http, $location, $cookies
     var checkboxes = document.getElementsByClassName('my-checkbox');
     if (document.getElementById('check-all').checked) {
       homeCtrlData.checkedCount = homeCtrlData.flashcards.length;
-      for (let checkbox of checkboxes) {
-        checkbox.checked = true;
+      for (var i = 0; i < checkboxes.length; i++) {
+        checkboxes[i].checked = true;
       }
     } else {
       homeCtrlData.checkedCount = 0;
-      for (let checkbox of checkboxes) {
-        checkbox.checked = false;
+      for (var i = 0; i < checkboxes.length; i++) {
+        checkboxes[i].checked = false;
       }
     }
   };
@@ -151,8 +151,8 @@ angular.module('app').controller('homeCtrl', function($http, $location, $cookies
     homeCtrlData.isAdding = false;
     var checkboxes = document.getElementsByClassName('my-checkbox');
     document.getElementById('check-all').checked = false;
-    for (let checkbox of checkboxes) {
-      checkbox.checked = false;
+    for (var i = 0; i < checkboxes.length; i++) {
+      checkboxes[i].checked = false;
     }
     homeCtrlData.checkedCount = 0;
 
@@ -181,8 +181,8 @@ angular.module('app').controller('homeCtrl', function($http, $location, $cookies
   };
 
   homeCtrlData.saveCards = function () {
-    for (let flashcard of homeCtrlData.dirtyCards) {
-      $http.put('/api/flashcards/' + flashcard._id, flashcard)
+    for (var i = 0; i < homeCtrlData.dirtyCards.length; i++) {
+      $http.put('/api/flashcards/' + homeCtrlData.dirtyCards[i]._id, homeCtrlData.dirtyCards[i])
         .success(function (data) {
           homeCtrlData.getCards();
         })
@@ -198,9 +198,9 @@ angular.module('app').controller('homeCtrl', function($http, $location, $cookies
 
   homeCtrlData.deleteCards = function () {
     var checkboxes = document.getElementsByClassName('my-checkbox');
-    for (let checkbox of checkboxes) {
-      if (checkbox.checked) {
-        $http.delete('api/flashcards/' + checkbox.id)
+    for (var i = 0; i < checkboxes.length; i++) {
+      if (checkboxes[i].checked) {
+        $http.delete('api/flashcards/' + checkboxes[i].id)
           .success(function (data) {
             homeCtrlData.getCards();
             homeCtrlData.reset();
@@ -217,8 +217,8 @@ angular.module('app').controller('homeCtrl', function($http, $location, $cookies
 
     var checkboxes = document.getElementsByClassName('my-checkbox');
     document.getElementById('check-all').checked = false;
-    for (let checkbox of checkboxes) {
-      checkbox.checked = false;
+    for (var i = 0; i < checkboxes.length; i++) {
+      checkboxes[i].checked = false;
     }
     homeCtrlData.checkedCount = 0;
   };
