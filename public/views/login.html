@@ -1,36 +1,33 @@
-<div ng-controller="loginCtrl as login">
-  <h2 class="text-center">Welcome to eFlashcards!</h2>
-  <h2 class="text-center"><small>Please log in</small></h2>
+<h2 class="text-center">Welcome to eFlashcards!</h2>
+<h2 class="text-center"><small>Please log in</small></h2>
 
+<br>
+
+<p class="text-center text-success" id="register-success"><span class="bg-success">{{login.registeredMsg}}</span></p>
+<p class="text-center text-danger" id="login-error"><span class="bg-danger">{{login.errorMsg}}</span></p>
+<form>
+  <div class="form-group row">
+    <label for="my-username" class="col-sm-2 col-lg-1 col-lg-offset-2 col-form-label">Username</label>
+    <div class="col-sm-8 col-lg-7">
+      <input class="form-control" type="text" placeholder="Enter username" ng-model="login.loggedInUser.username" autocomplete="off" id="my-username">
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label for="my-password" class="col-sm-2 col-lg-1 col-lg-offset-2 col-form-label">Password</label>
+    <div class="col-sm-8 col-lg-7">
+      <input class="form-control" type="password" placeholder="Enter password" ng-model="login.loggedInUser.password" id="my-password">
+    </div>
+  </div>
+
+  <div class="text-center">
+    <button class="btn btn-primary" ng-click="login.authenticate(login.loggedInUser)">
+      <span class="glyphicon glyphicon-log-in"></span>
+      Log in
+    </button>
+  </div>
   <br>
-
-  <p class="text-center text-success" id="register-success"><span class="bg-success">{{login.registeredMsg}}</span></p>
-  <p class="text-center text-danger" id="login-error"><span class="bg-danger">{{login.errorMsg}}</span></p>
-  <form>
-    <div class="form-group row">
-      <label for="my-username" class="col-sm-2 col-lg-1 col-lg-offset-2 col-form-label">Username</label>
-      <div class="col-sm-8 col-lg-7">
-        <input class="form-control" type="text" placeholder="Enter username" ng-model="login.loggedInUser.username" autocomplete="off" id="my-username">
-      </div>
-    </div>
-
-    <div class="form-group row">
-      <label for="my-password" class="col-sm-2 col-lg-1 col-lg-offset-2 col-form-label">Password</label>
-      <div class="col-sm-8 col-lg-7">
-        <input class="form-control" type="password" placeholder="Enter password" ng-model="login.loggedInUser.password" id="my-password">
-      </div>
-    </div>
-
-    <div class="text-center">
-      <button class="btn btn-primary" ng-click="login.authenticate(login.loggedInUser)">
-        <span class="glyphicon glyphicon-log-in"></span>
-        Log in
-      </button>
-    </div>
-    <br>
-    <div class="text-center">
-      <a href="#" ng-click="login.registerNew()">Don't have an account? Register here!</a>
-    </div>
-  </form>
-
-</div>
+  <div class="text-center">
+    <a href="#" ng-click="login.registerNew()">Don't have an account? Register here!</a>
+  </div>
+</form>

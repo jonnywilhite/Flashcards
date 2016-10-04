@@ -9,21 +9,21 @@ app.config(function ($routeProvider, $locationProvider, $httpProvider) {
     })
     .when("/login", {
       templateUrl : "views/login.html",
-      controller : "loginCtrl",
+      controller : "loginCtrl as login",
       data : {
         pageTitle: "eFlashcards | Login"
       }
     })
     .when("/home", {
       templateUrl : "views/home.html",
-      controller : "homeCtrl",
+      controller : "homeCtrl as home",
       data : {
         pageTitle: "eFlashcards | Home"
       }
     })
     .when("/register", {
       templateUrl : "views/register.html",
-      controller : "registerCtrl",
+      controller : "registerCtrl as reg",
       data : {
         pageTitle: "eFlashcards | Register"
       }
