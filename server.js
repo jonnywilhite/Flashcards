@@ -1,5 +1,7 @@
 "use strict";
 
+console.log('hello world');
+
 const express = require('express');
 const mongoose = require('mongoose');
 const ObjectId = require('mongoose').Schema.ObjectId;
