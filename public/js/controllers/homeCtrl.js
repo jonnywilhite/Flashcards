@@ -7,7 +7,6 @@ angular.module('app').controller('homeCtrl', function($http, $location, $cookies
   homeCtrlData.quizViewShown = true;
   homeCtrlData.editViewShown = false;
   homeCtrlData.firstName = (AuthService.currentUser() && AuthService.currentUser().firstName) || $cookies.get('firstName');
-  console.log("hello world");
 
   homeCtrlData.getCards = function () {
     $http.get('/api/flashcards')
